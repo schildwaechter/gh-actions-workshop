@@ -5,20 +5,35 @@ on:
       inputs:
         jobselector:
           type: choice
-          description: Choose your favourite job
+          description: Choose your greeting
           options:
-            - blue
-            - green
+            - english
+            - norsk
         message:
           type: string
           description: Input your message
 
 jobs:
-  hello_world_job:
-    name: Hello world
+  hello_english:
+    if: inputs.jobselector == 'english'
+    name: Greeting english
 
     runs-on: ubuntu-latest
 
     steps:
     - name: Print message to terminal
-      run: echo "Hello 🌏!" ${{ inputs.message }}
+      run: echo "Hello ${MESSAGE}!"
+      env:
+        MESSAGE: ${{ inputs.message }}
+
+  hello_norsk:
+    if: inputs.jobselector == 'norsk'
+    name: Hilsen norsk
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print message to terminal
+      run: echo "Hei ${MESSAGE}!"
+      env:
+        MESSAGE: ${{ inputs.message }}
