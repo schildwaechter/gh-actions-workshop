@@ -1,0 +1,24 @@
+name: input testing
+
+on:
+    workflow_dispatch:
+      inputs:
+        jobselector:
+          type: choice
+          description: Choose your favourite job
+          options:
+            - blue
+            - green
+        message:
+          type: string
+          description: Input your message
+
+jobs:
+  hello_world_job:
+    name: Hello world
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print message to terminal
+      run: echo "Hello 🌏!" ${{ inputs.message }}
